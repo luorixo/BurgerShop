@@ -1,6 +1,6 @@
 package nz.ac.auckland.se281.a2;
 
-abstract class Food {
+abstract class Food { // Food abstract class (parent of Burger, Snack, Drink child classes)
 	
 	// Initializing instance variables
 	int id;

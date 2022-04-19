@@ -6,36 +6,10 @@ import java.util.ArrayList;
 
 public class BurgerShop {
 	
-	int id = 0;
+	int id = 0; // variable for tracking cart item id's
 	ArrayList<Food> cartItems = new ArrayList<Food>(); // Create cartItems array list containing Food instance references
 	
-	public static void main(String []args) {
-		
-		// initializing all burgers on the menu
-		Burger cheeseBurger = new Burger(0, "Cheese Burger", (float) 15.5);
-	    Burger avoBurger = new Burger(1, "Avocado Burger", (float) 17);
-	    Burger veganBurger = new Burger(2, "Vegan Burger", (float) 18.5);
-	    Burger fisherBurger = new Burger(3, "Fisherman Burger", (float) 17);
-	    Burger buffaloBurger = new Burger(4, "Buffalo Chicken Burger", (float) 13);
-	    Burger truffleBurger = new Burger(5, "Black Truffle Burger", (float) 27.5);
-	    Burger foieGrasBurger = new Burger(6, "Crispy Foie Gras Burger", (float) 34);
-	    
-	    // initializing all snacks on the menu
-	    Snack chips = new Snack(7, "Chips", (float) 7.5);
-	    Snack sweetPotatoChips = new Snack(8, "Sweet Potato Chips", (float) 10);
-	    Snack onionRings = new Snack(9, "Onion Rings", (float) 5);
-	    Snack buffaloWings = new Snack(10, "Buffalo Chicken Wings", (float) 12);
-	    Snack fishFingers = new Snack(11, "Fish Fingers", (float) 8);
-	    
-	    // Initializing all drinks on the menu
-	    Drink coke = new Drink(12, "Coke", (float) 2);	
-	    Drink sprite = new Drink(13, "Sprite", (float) 2);
-	    Drink fanta = new Drink(14, "Fanta", (float) 2);
-	    Drink milkshake = new Drink(15, "Milkshake", (float) 4);
-	}
-	
 	public BurgerShop() {
-	
 	}
 
 	/**
@@ -108,7 +82,7 @@ public class BurgerShop {
 	public void showCart() {
 		// checks if cart is empty
 		if(cartItems.size() == 0) {
-			System.out.println(MessagesCLI.CART_EMPTY); // prints empty cart message
+			MessagesCLI.CART_EMPTY.printMessage(); // prints empty cart message
 		} else {
 			float totalPrice = 0; // initialize total price to 0
 			
@@ -120,6 +94,11 @@ public class BurgerShop {
 				System.out.println();
 				
 				totalPrice += item.price; // adds current item's price to the total
+			}
+			
+			if(totalPrice >= (float) 100) { // applies discount if total is at or above $100
+				MessagesCLI.DISCOUNT.printMessage(); // print discount message
+				totalPrice *= 0.75; // apply 25% discount
 			}
 			System.out.print("Total: $" + String.format("%.02f", totalPrice)); // prints total
 			System.out.println();
