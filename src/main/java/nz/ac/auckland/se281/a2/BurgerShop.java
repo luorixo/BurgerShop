@@ -204,10 +204,16 @@ public class BurgerShop {
 			for(Food item : cartItems) { // loops through each item in cart
 				if(item instanceof Burger) {
 					orderTime += 60;
+					if(burgerCount < 1) {
+						orderTime += 240;
+					}
 					burgerCount++;
 					
 				} else if(item instanceof Drink) {
 					orderTime += 15;
+					if(drinkCount < 1) {
+						orderTime += 30;
+					}
 					drinkCount++;
 					
 					Drink currentDrink = (Drink) item; // cast from Food to Drink class type
@@ -221,6 +227,9 @@ public class BurgerShop {
 					}
 				} else if(item instanceof Snack) {
 					orderTime += 30;
+					if(snackCount < 1) {
+						orderTime += 150;
+					}
 					snackCount++;
 					
 					Snack currentSnack = (Snack) item; // cast from Food to Snack class type
@@ -234,20 +243,25 @@ public class BurgerShop {
 					}
 				} else {
 					orderTime += 105;
+					
+					if(burgerCount < 1) {
+						orderTime += 240;
+					}
+					if(drinkCount < 1) {
+						orderTime += 30;
+					}
+					if(snackCount < 1) {
+						orderTime += 150;
+					}
+					
 					burgerCount++;
 					drinkCount++;
 					snackCount++;
 				}
 				
-				if(burgerCount == 1) {
-					orderTime += 240;
-				}
-				if(drinkCount == 1) {
-					orderTime += 30;
-				}
-				if(snackCount == 1) {
-					orderTime += 150;
-				}
+				
+				
+				
 			}
 			 
 			boolean mediumComboAvailable = ((mediumDrinkCount>0) && (mediumSnackCount>0));
@@ -266,6 +280,7 @@ public class BurgerShop {
 				int seconds = orderTime % 60;
 				
 				System.out.println(MessagesCLI.ESTIMATE_WAITING_TIME.getMessage() + String.format("%d hours %d minutes %d seconds", hours, minutes, seconds));
+				clearCart();
 			}
 			
 			
