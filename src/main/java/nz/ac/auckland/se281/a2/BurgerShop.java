@@ -3,6 +3,7 @@ package nz.ac.auckland.se281.a2;
 import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 import nz.ac.auckland.se281.a2.cli.MessagesCLI;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BurgerShop {
 	
@@ -43,7 +44,7 @@ public class BurgerShop {
 		}
 		
 		name = name + " (" + size + ")"; // reformats name to include size
-		cartItems.add(new Snack(id, name, price)); // adds snack to cart (creates snack instance)
+		cartItems.add(new Snack(id, name, price, size)); // adds snack to cart (creates snack instance)
 		id++; // increments id
 	}
 
@@ -69,7 +70,7 @@ public class BurgerShop {
 		}
 
 		name = name + " (" + size + ")"; // reformats name to include size
-		cartItems.add(new Drink(id, name, price)); // adds drink to cart (creates drink instance)
+		cartItems.add(new Drink(id, name, price, size)); // adds drink to cart (creates drink instance)
 		id++; // increments id
 	}
 
@@ -184,6 +185,92 @@ public class BurgerShop {
 	 * 
 	 */
 	public void confirmOrder() {
-		// TODO TASK4
+		if(cartItems.size() == 0) { // check if cart is empty
+			MessagesCLI.ORDER_INVALID_CART_EMPTY.printMessage(); // prints empty cart message
+		} else {
+			int orderTime = 0;
+			int burgerCount = 0;
+			int drinkCount = 0;
+			int snackCount = 0;
+			
+			int mediumDrinkCount = 0;
+			int largeDrinkCount = 0;
+			int extraLargeDrinkCount = 0;
+			
+			int mediumSnackCount = 0;
+			int largeSnackCount = 0;
+			int extraLargeSnackCount = 0;
+			
+			for(Food item : cartItems) { // loops through each item in cart
+				if(item instanceof Burger) {
+					orderTime += 60;
+					burgerCount++;
+					
+				} else if(item instanceof Drink) {
+					orderTime += 15;
+					drinkCount++;
+					
+					Drink currentDrink = (Drink) item; // cast from Food to Drink class type
+					
+					if(currentDrink.size == SIZE.L) {
+						largeDrinkCount++;
+					} else if(currentDrink.size == SIZE.XL) {
+						extraLargeDrinkCount++;
+					} else {
+						mediumDrinkCount++;
+					}
+				} else if(item instanceof Snack) {
+					orderTime += 30;
+					snackCount++;
+					
+					Snack currentSnack = (Snack) item; // cast from Food to Snack class type
+					
+					if(currentSnack.size == SIZE.L) {
+						largeSnackCount++;
+					} else if(currentSnack.size == SIZE.XL) {
+						extraLargeSnackCount++;
+					} else {
+						mediumSnackCount++;
+					}
+				} else {
+					orderTime += 105;
+					burgerCount++;
+					drinkCount++;
+					snackCount++;
+				}
+				
+				if(burgerCount == 1) {
+					orderTime += 240;
+				}
+				if(drinkCount == 1) {
+					orderTime += 30;
+				}
+				if(snackCount == 1) {
+					orderTime += 150;
+				}
+			}
+			 
+			boolean mediumComboAvailable = ((mediumDrinkCount>0) && (mediumSnackCount>0));
+			boolean largeComboAvailable = ((largeDrinkCount>0) && (largeSnackCount>0));
+			boolean extraLargeComboAvailable = ((extraLargeDrinkCount>0) && (extraLargeSnackCount>0));
+			
+			boolean comboAvailable = (mediumComboAvailable || largeComboAvailable || extraLargeComboAvailable);
+			if((burgerCount>0) && (comboAvailable)) {
+				MessagesCLI.MISSED_COMBO.printMessage();
+			} else {
+				showCart();
+				// code adapted from https://stackoverflow.com/a/6118983
+				// converts order time from seconds to HOURS/MINUTES/SECONDS
+				int hours = orderTime / 3600;
+				int minutes = (orderTime % 3600) / 60;
+				int seconds = orderTime % 60;
+				
+				System.out.println(MessagesCLI.ESTIMATE_WAITING_TIME.getMessage() + String.format("%d hours %d minutes %d seconds", hours, minutes, seconds));
+			}
+			
+			
+		}
+		
+		
 	}
 }
