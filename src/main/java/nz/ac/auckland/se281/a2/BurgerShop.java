@@ -2,8 +2,12 @@ package nz.ac.auckland.se281.a2;
 
 import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 import nz.ac.auckland.se281.a2.cli.MessagesCLI;
+import java.util.ArrayList;
 
 public class BurgerShop {
+	
+	int id = 0;
+	ArrayList<Food> cartItems = new ArrayList<Food>(); // Create cartItems array list containing Food instance references
 	
 	public static void main(String []args) {
 		
@@ -17,21 +21,21 @@ public class BurgerShop {
 	    Burger foieGrasBurger = new Burger(6, "Crispy Foie Gras Burger", (float) 34);
 	    
 	    // initializing all snacks on the menu
-	    Snack chips = new Snack(7, "Chips", (float) 7.5);
+	    /*Snack chips = new Snack(7, "Chips", (float) 7.5);
 	    Snack sweetPotatoChips = new Snack(8, "Sweet Potato Chips", (float) 10);
 	    Snack onionRings = new Snack(9, "Onion Rings", (float) 5);
 	    Snack buffaloWings = new Snack(10, "Buffalo Chicken Wings", (float) 12);
 	    Snack fishFingers = new Snack(11, "Fish Fingers", (float) 8);
 	    
-	    // initalizing all drinks on the menu
-	    Drink coke = new Drink(12, "Coke", (float) 2);
+	    // Initializing all drinks on the menu
+	    Drink coke = new Drink(12, "Coke", (float) 2);	
 	    Drink sprite = new Drink(13, "Sprite", (float) 2);
 	    Drink fanta = new Drink(14, "Fanta", (float) 2);
-	    Drink milkshake = new Drink(15, "Milkshake", (float) 4);
+	    Drink milkshake = new Drink(15, "Milkshake", (float) 4);*/
 	}
 	
 	public BurgerShop() {
-			
+	
 	}
 
 	/**
@@ -41,7 +45,8 @@ public class BurgerShop {
 	 * @param price
 	 */
 	public void addBurger(String name, float price) {
-		// TODO TASK1
+		cartItems.add(new Burger(id, name, price)); // adds burger to cart (creates burger instance)
+		id++; // increments id
 	}
 
 	/**
@@ -55,7 +60,16 @@ public class BurgerShop {
 	 * @param size
 	 */
 	public void addSnack(String name, float price, SIZE size) {
-		// TODO TASK1
+		
+		// checks if size is L or XL
+		if(size == SIZE.L) {
+			price += 3; // increments price by $3
+		} else if(size == SIZE.XL) {
+			price += 4; // increments price by $4
+		}
+		
+		cartItems.add(new Snack(id, name, price, size)); // adds snack to cart (creates snack instance)
+		id++; // increments id
 	}
 
 	/**
@@ -72,7 +86,15 @@ public class BurgerShop {
 	 * @param size
 	 */
 	public void addDrink(String name, float price, SIZE size) {
-		// TODO TASK1
+		// checks if size is L or XL
+		if(size == SIZE.L) {
+			price += 3; // increments price by $3
+		} else if(size == SIZE.XL) {
+			price += 4; // increments price by $4
+		}
+				
+		cartItems.add(new Drink(id, name, price, size)); // adds drink to cart (creates drink instance)
+		id++; // increments id
 	}
 
 	/**
