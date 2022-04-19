@@ -103,8 +103,6 @@ public class BurgerShop {
 			System.out.print("Total: $" + String.format("%.02f", totalPrice)); // prints total
 			System.out.println();
 		}
-			
-		
 	}
 
 	/**
@@ -124,7 +122,26 @@ public class BurgerShop {
 	 */
 	public void addCombo(String nameBurger, float priceBurger, String nameSnack, float priceSnack, String nameDrink,
 			float priceDrink, SIZE size) {
-		// TODO TASK2
+		// checks if size is L or XL
+		if(size == SIZE.L) {
+			// increments price by $3
+			priceSnack += 3;
+			priceDrink += 3;
+		} else if(size == SIZE.XL) {
+			// increments price by $4
+			priceSnack += 4;
+			priceDrink += 4;
+		}
+		
+		// halves drink price
+		priceDrink *= 0.5;
+		// calculates the sum of the burger, drink, and snack prices
+		float comboTotal = priceBurger + priceSnack + priceDrink; 
+		// formats the combo name
+		String comboName = "COMBO : (" + nameBurger + ", " + nameSnack + " (" + size + "), " + nameDrink + " (" + size + "))";
+		
+		cartItems.add(new Combo(id, comboName, comboTotal)); // adds combo to cart (creates combo instance)
+		id++; // increment id
 	}
 
 	/**
