@@ -153,14 +153,29 @@ public class BurgerShop {
 	 * @param posCart
 	 */
 	public void removeItem(int posCart) {
-		// TODO TASK3
+		
+		if((posCart < 0) || (posCart >= cartItems.size())) { // checks if item position exists in cart
+			MessagesCLI.NOT_VALID_CART_POSITION.printMessage(); // prints error message
+			
+		} else {
+			for(Food item : cartItems) { // loops through each item in cart
+				if(item.id > posCart) { // checks if the item in the cart has an ID greater than posCart
+					item.id -= 1; // decrements id by one
+				}
+			}
+			
+			cartItems.remove(posCart); // remove food item from cart
+			id--; // decrements id
+		}
 	}
 
 	/**
 	 * removes all elements in the cart
 	 */
 	public void clearCart() {
-		// TODO TASK3
+		// clears all items in cart arraylist
+		cartItems.clear();
+		id = 0; // sets id to 0
 	}
 
 	/**
