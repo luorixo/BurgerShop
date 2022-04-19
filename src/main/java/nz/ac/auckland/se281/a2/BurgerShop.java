@@ -22,6 +22,12 @@ public class BurgerShop {
 	    Snack onionRings = new Snack(9, "Onion Rings", (float) 5);
 	    Snack buffaloWings = new Snack(10, "Buffalo Chicken Wings", (float) 12);
 	    Snack fishFingers = new Snack(11, "Fish Fingers", (float) 8);
+	    
+	    // initalizing all drinks on the menu
+	    Drink coke = new Drink(12, "Coke", (float) 2);
+	    Drink sprite = new Drink(13, "Sprite", (float) 2);
+	    Drink fanta = new Drink(14, "Fanta", (float) 2);
+	    Drink milkshake = new Drink(15, "Milkshake", (float) 4);
 	}
 	
 	public BurgerShop() {
