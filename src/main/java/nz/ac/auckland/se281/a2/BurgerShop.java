@@ -6,7 +6,7 @@ import nz.ac.auckland.se281.a2.cli.MessagesCLI;
 public class BurgerShop {
 
 	public BurgerShop() {
-
+			
 	}
 
 	/**
