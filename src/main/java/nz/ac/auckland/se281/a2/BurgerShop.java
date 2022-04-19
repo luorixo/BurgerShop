@@ -4,7 +4,26 @@ import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 import nz.ac.auckland.se281.a2.cli.MessagesCLI;
 
 public class BurgerShop {
-
+	
+	public static void main(String []args) {
+		
+		// initializing all burgers on the menu
+		Burger cheeseBurger = new Burger(0, "Cheese Burger", (float) 15.5);
+	    Burger avoBurger = new Burger(1, "Avocado Burger", (float) 17);
+	    Burger veganBurger = new Burger(2, "Vegan Burger", (float) 18.5);
+	    Burger fisherBurger = new Burger(3, "Fisherman Burger", (float) 17);
+	    Burger buffaloBurger = new Burger(4, "Buffalo Chicken Burger", (float) 13);
+	    Burger truffleBurger = new Burger(5, "Black Truffle Burger", (float) 27.5);
+	    Burger foieGrasBurger = new Burger(6, "Crispy Foie Gras Burger", (float) 34);
+	    
+	    // initializing all snacks on the menu
+	    Snack chips = new Snack(7, "Chips", (float) 7.5);
+	    Snack sweetPotatoChips = new Snack(8, "Sweet Potato Chips", (float) 10);
+	    Snack onionRings = new Snack(9, "Onion Rings", (float) 5);
+	    Snack buffaloWings = new Snack(10, "Buffalo Chicken Wings", (float) 12);
+	    Snack fishFingers = new Snack(11, "Fish Fingers", (float) 8);
+	}
+	
 	public BurgerShop() {
 			
 	}
