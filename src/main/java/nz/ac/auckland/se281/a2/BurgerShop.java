@@ -162,8 +162,9 @@ public class BurgerShop {
 
 		} else {
 			for (Food item : cartItems) { // loops through each item in cart
-				if (item.id > posCart) { // checks if the item in the cart has an ID greater than posCart
-					item.id -= 1; // decrements id by one
+				if (item.getId() > posCart) { // checks if the item in the cart has an ID greater than posCart
+					item.setId(item.getId() - 1);
+					; // decrements id by one
 				}
 			}
 
@@ -190,13 +191,13 @@ public class BurgerShop {
 		if (cartItems.size() == 0) { // check if cart is empty
 			MessagesCLI.ORDER_INVALID_CART_EMPTY.printMessage(); // prints empty cart message
 		} else {
-			
+
 			// initializing counting variables
 			int orderTime = 0; // counts order time
 			int burgerCount = 0;
 			int drinkCount = 0;
 			int snackCount = 0;
-			
+
 			// counts drink sizes
 			int mediumDrinkCount = 0;
 			int largeDrinkCount = 0;
@@ -222,16 +223,16 @@ public class BurgerShop {
 					drinkCount++;
 
 					Drink currentDrink = (Drink) item; // cast from Food to Drink class type
-					
+
 					// checks size of drink and increments drink counts as needed
-					if (currentDrink.size == SIZE.L) {
+					if (currentDrink.getSize() == SIZE.L) {
 						largeDrinkCount++;
-					} else if (currentDrink.size == SIZE.XL) {
+					} else if (currentDrink.getSize() == SIZE.XL) {
 						extraLargeDrinkCount++;
 					} else {
 						mediumDrinkCount++;
 					}
-					
+
 				} else if (item instanceof Snack) {
 					orderTime += 30; // increases order time
 					if (snackCount < 1) { // checks whether it is the first burger
@@ -240,19 +241,19 @@ public class BurgerShop {
 					snackCount++;
 
 					Snack currentSnack = (Snack) item; // cast from Food to Snack class type
-					
+
 					// checks size of snack and increments snack counts as needed
-					if (currentSnack.size == SIZE.L) {
+					if (currentSnack.getSize() == SIZE.L) {
 						largeSnackCount++;
-					} else if (currentSnack.size == SIZE.XL) {
+					} else if (currentSnack.getSize() == SIZE.XL) {
 						extraLargeSnackCount++;
 					} else {
 						mediumSnackCount++;
 					}
-					
+
 				} else { // if current cart item is a combo
 					orderTime += 105; // increases order time
-					
+
 					// checks whether it's the first burger/drink/snack
 					if (burgerCount < 1) {
 						orderTime += 240; // increases order time
@@ -263,32 +264,32 @@ public class BurgerShop {
 					if (snackCount < 1) {
 						orderTime += 150; // increases order time
 					}
-					
+
 					// increments burger/drink/snack count
 					burgerCount++;
 					drinkCount++;
 					snackCount++;
 				}
 			}
-			
+
 			// checks if there is a drink & snack of the same size in the cart
 			boolean mediumComboAvailable = ((mediumDrinkCount > 0) && (mediumSnackCount > 0));
 			boolean largeComboAvailable = ((largeDrinkCount > 0) && (largeSnackCount > 0));
 			boolean extraLargeComboAvailable = ((extraLargeDrinkCount > 0) && (extraLargeSnackCount > 0));
-			
+
 			boolean comboAvailable = (mediumComboAvailable || largeComboAvailable || extraLargeComboAvailable);
 			// checks if any combo is available
 			if ((burgerCount > 0) && (comboAvailable)) {
 				MessagesCLI.MISSED_COMBO.printMessage(); // shows warning
 			} else { // if there is no combo
 				showCart(); // shows current cart
-				
+
 				// code adapted from https://stackoverflow.com/a/6118983
 				// converts order time from seconds to HOURS/MINUTES/SECONDS
 				int hours = orderTime / 3600;
 				int minutes = (orderTime % 3600) / 60;
 				int seconds = orderTime % 60;
-				
+
 				// prints out order time
 				System.out.println(MessagesCLI.ESTIMATE_WAITING_TIME.getMessage()
 						+ String.format("%d hours %d minutes %d seconds", hours, minutes, seconds));

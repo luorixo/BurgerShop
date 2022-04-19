@@ -8,4 +8,14 @@ public class Burger extends Food {
 		// calls parent Food constructor
 		super(id, name, price);
 	}
+	
+	@Override
+	public int getId() { // id getter method
+		return id;
+	}
+
+	@Override
+	public void setId(int newId) { // id setter method
+		this.id = newId;
+	}
 }
