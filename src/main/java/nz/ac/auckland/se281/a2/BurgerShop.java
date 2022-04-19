@@ -21,7 +21,7 @@ public class BurgerShop {
 	    Burger foieGrasBurger = new Burger(6, "Crispy Foie Gras Burger", (float) 34);
 	    
 	    // initializing all snacks on the menu
-	    /*Snack chips = new Snack(7, "Chips", (float) 7.5);
+	    Snack chips = new Snack(7, "Chips", (float) 7.5);
 	    Snack sweetPotatoChips = new Snack(8, "Sweet Potato Chips", (float) 10);
 	    Snack onionRings = new Snack(9, "Onion Rings", (float) 5);
 	    Snack buffaloWings = new Snack(10, "Buffalo Chicken Wings", (float) 12);
@@ -31,7 +31,7 @@ public class BurgerShop {
 	    Drink coke = new Drink(12, "Coke", (float) 2);	
 	    Drink sprite = new Drink(13, "Sprite", (float) 2);
 	    Drink fanta = new Drink(14, "Fanta", (float) 2);
-	    Drink milkshake = new Drink(15, "Milkshake", (float) 4);*/
+	    Drink milkshake = new Drink(15, "Milkshake", (float) 4);
 	}
 	
 	public BurgerShop() {
@@ -68,7 +68,8 @@ public class BurgerShop {
 			price += 4; // increments price by $4
 		}
 		
-		cartItems.add(new Snack(id, name, price, size)); // adds snack to cart (creates snack instance)
+		name = name + " (" + size + ")"; // reformats name to include size
+		cartItems.add(new Snack(id, name, price)); // adds snack to cart (creates snack instance)
 		id++; // increments id
 	}
 
@@ -92,8 +93,9 @@ public class BurgerShop {
 		} else if(size == SIZE.XL) {
 			price += 4; // increments price by $4
 		}
-				
-		cartItems.add(new Drink(id, name, price, size)); // adds drink to cart (creates drink instance)
+
+		name = name + " (" + size + ")"; // reformats name to include size
+		cartItems.add(new Drink(id, name, price)); // adds drink to cart (creates drink instance)
 		id++; // increments id
 	}
 
@@ -104,7 +106,26 @@ public class BurgerShop {
 	 *
 	 */
 	public void showCart() {
-		// TODO TASK1
+		// checks if cart is empty
+		if(cartItems.size() == 0) {
+			System.out.println(MessagesCLI.CART_EMPTY); // prints empty cart message
+		} else {
+			float totalPrice = 0; // initialize total price to 0
+			
+			for(Food item : cartItems) { // loops through each item in cart
+				// prints item id, name, and price
+				System.out.print(item.id + " - ");
+				System.out.print(item.name + ": $");
+				System.out.print(String.format("%.02f", item.price));
+				System.out.println();
+				
+				totalPrice += item.price; // adds current item's price to the total
+			}
+			System.out.print("Total: $" + String.format("%.02f", totalPrice)); // prints total
+			System.out.println();
+		}
+			
+		
 	}
 
 	/**
