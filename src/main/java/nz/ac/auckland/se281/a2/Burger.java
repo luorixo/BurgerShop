@@ -8,4 +8,9 @@ public class Burger extends Food {
 		// calls parent Food constructor
 		super(id, name, price);
 	}
+
+
+	public static void main(String []args) {
+	      Burger cheeseBurger = new Burger(0, "Cheese Burger", (float) 15.5);
+	}
 }
