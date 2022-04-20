@@ -3,12 +3,11 @@ package nz.ac.auckland.se281.a2;
 import nz.ac.auckland.se281.a2.cli.Menu.SIZE;
 import nz.ac.auckland.se281.a2.cli.MessagesCLI;
 import java.util.ArrayList;
-import java.util.List;
 
 public class BurgerShop {
 
-	int id = 0; // variable for tracking cart item id's
-	ArrayList<Food> cartItems = new ArrayList<Food>(); // Create cartItems array list containing Food instance
+	private int id = 0; // variable for tracking cart item id's
+	private ArrayList<Food> cartItems = new ArrayList<Food>(); // Create cartItems array list containing Food instance
 														// references
 
 	public BurgerShop() {
@@ -44,9 +43,9 @@ public class BurgerShop {
 			price += 4; // increments price by $4
 		}
 
-		name = name + " (" + size + ")"; // reformats name to include size
+		name = name + " (" + size + ")";
 		cartItems.add(new Snack(id, name, price, size)); // adds snack to cart (creates snack instance)
-		id++; // increments id
+		id++;
 	}
 
 	/**
@@ -70,9 +69,9 @@ public class BurgerShop {
 			price += 4; // increments price by $4
 		}
 
-		name = name + " (" + size + ")"; // reformats name to include size
+		name = name + " (" + size + ")";
 		cartItems.add(new Drink(id, name, price, size)); // adds drink to cart (creates drink instance)
-		id++; // increments id
+		id++;
 	}
 
 	/**
@@ -164,12 +163,11 @@ public class BurgerShop {
 			for (Food item : cartItems) { // loops through each item in cart
 				if (item.getId() > posCart) { // checks if the item in the cart has an ID greater than posCart
 					item.setId(item.getId() - 1);
-					; // decrements id by one
 				}
 			}
 
 			cartItems.remove(posCart); // remove food item from cart
-			id--; // decrements id
+			id--;
 		}
 	}
 
@@ -177,7 +175,7 @@ public class BurgerShop {
 	 * removes all elements in the cart
 	 */
 	public void clearCart() {
-		// clears all items in cart arraylist
+		// clears all cart items
 		cartItems.clear();
 		id = 0; // sets id to 0
 	}
@@ -293,7 +291,7 @@ public class BurgerShop {
 				// prints out order time
 				System.out.println(MessagesCLI.ESTIMATE_WAITING_TIME.getMessage()
 						+ String.format("%d hours %d minutes %d seconds", hours, minutes, seconds));
-				clearCart(); // clears cart
+				clearCart();
 			}
 		}
 	}
